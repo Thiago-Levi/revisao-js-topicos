@@ -10,3 +10,15 @@
 .link {
   color: lightblue;
 }
+
+.color-of-even{
+  color:blue;
+}
+.color-of-odd{
+  color: pink;
+}
+
+
+.upper-case{
+  text-transform: uppercase;
+}
