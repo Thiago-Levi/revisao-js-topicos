@@ -5,18 +5,21 @@
     'Clicou na div.' não seja exibida no console.
 */
 
-const div = document.querySelector('div')
-const elementsInsideDiv = Array.from(div.children)
+const div = document.querySelector("div");
+const elementsInsideDiv = Array.from(div.children);
+const h2 = document.querySelector('[data-js="h2"]');
+elementsInsideDiv.forEach((element) => {
+  element.addEventListener("click", (event) => {
+    const clickedElement = `Clicou no ${event.target.tagName.toLowerCase()}`;
+    h2.innerText = clickedElement;
+    event.stopPropagation();
+  });
+});
+console.log(elementsInsideDiv);
 
-elementsInsideDiv.forEach(element => {
-  element.addEventListener('click', () => {
-    console.log('Clicou no filho da div.')
-  })
-})
-
-div.addEventListener('click', () => {
-  console.log('Clicou na div.')
-})
+div.addEventListener("click", (event) => {
+  console.log("Clicou na div.");
+});
 
 /*
   02
@@ -41,6 +44,10 @@ div.addEventListener('click', () => {
     seja exibida no console.
 */
 
+h2.addEventListener("copy", (event) => {
+  console.log("Texto copiado");
+});
+
 /*
   05
 
@@ -49,12 +56,27 @@ div.addEventListener('click', () => {
     "Eixo X: COORDENADA_EIXO_X | Eixo Y: COORDENADA_EIXO_Y".
 */
 
+const egg = document.querySelector('[data-js="egg"]');
+
+egg.addEventListener("mousemove", (event) => {
+  egg.innerHTML = `Eixo X: ${event.offsetX} | Eixo Y: ${event.offsetY}`;
+});
+
 /*
   06
 
   - Modifique a cor do ovo para "lightgoldenrodyellow" quando o botão for 
     clicado.
 */
+
+const button = document.querySelector('[data-js="button"]');
+const colorModifyTo = (colorName) => {
+  egg.style.backgroundColor = colorName;
+};
+
+button.addEventListener("click", () => {
+  colorModifyTo("lightgoldenrodyellow");
+});
 
 /*
   07
@@ -66,13 +88,17 @@ div.addEventListener('click', () => {
 */
 
 const people = [
-  { id: 1, name: 'Pedro Henrique', profession: 'Dentista' },
-  { id: 2, name: 'Fábio Alexandre', profession: 'Físico' },
-  { id: 3, name: 'Thiago Ferreira', profession: 'Veterinário' },
-  { id: 4, name: 'Marcelo Antonio', profession: 'Matemático' },
-  { id: 5, name: 'Camilla Midori', profession: 'Engenheira Civil' },
-  { id: 6, name: 'Gustavo D\'Aqui', profession: 'Gerente de Marketing' },
-  { id: 7, name: 'Ana Paula', profession: 'Front-end developer' },
-  { id: 8, name: 'Matheus Manucci', profession: 'Piloto' },
-  { id: 9, name: 'Hamilton Silva', profession: 'Advogado' }
-]
+  { id: 1, name: "Pedro Henrique", profession: "Dentista" },
+  { id: 2, name: "Fábio Alexandre", profession: "Físico" },
+  { id: 3, name: "Thiago Ferreira", profession: "Veterinário" },
+  { id: 4, name: "Marcelo Antonio", profession: "Matemático" },
+  { id: 5, name: "Camilla Midori", profession: "Engenheira Civil" },
+  { id: 6, name: "Gustavo D'Aqui", profession: "Gerente de Marketing" },
+  { id: 7, name: "Ana Paula", profession: "Front-end developer" },
+  { id: 8, name: "Matheus Manucci", profession: "Piloto" },
+  { id: 9, name: "Hamilton Silva", profession: "Advogado" },
+];
+
+if (people.some(({ profession }) => profession === "Front-end developer")) {
+  console.log("O array people contém, no mínimo, um(a) Front-end developer.");
+}
