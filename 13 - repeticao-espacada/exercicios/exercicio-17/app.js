@@ -4,6 +4,17 @@
   - No envio do form, faça com que a página não seja recarregada.
 */
 
+const form = document.querySelector('[data-js="form"]');
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const inputValue = document.querySelector("#input");
+  const inputRegex = /^[a-zA-Z0-9]{7,11}$/;
+  const validate = inputRegex.test(inputValue.value);
+  console.log(inputValue.value);
+  console.log(validate);
+});
+
 /*
   02
 
@@ -19,6 +30,10 @@
   - Exiba no console o boolean no qual este teste resulta.
 */
 
+const myExpression = /documentation/;
+const paragraph = document.querySelector('[data-js="paragraph"]');
+console.log(myExpression.test(paragraph.textContent));
+
 /*
   04
 
@@ -27,7 +42,11 @@
   - Teste se o match aconteceu e exiba o resultado no console.
 */
 
-const B99message = 'E o Terry Crews faz tudo, inclusive tocar a abertura de B99 na flauta'
+const B99message =
+  "E o Terry Crews faz tudo, inclusive tocar a abertura de B99 na flauta";
+
+const regexB99 = /[A-Z0-9]/;
+console.log(regexB99.test(B99message));
 
 /*
   05
@@ -36,11 +55,11 @@ const B99message = 'E o Terry Crews faz tudo, inclusive tocar a abertura de B99 
     resultado do teste entre a regex e a string exibido no console seja true.
 */
 
-const word = 'O que a NASA fotografou no dia do seu aniversário?'
-const NASARegex = /^[A-Z]{4}$/
-const NASAResult = NASARegex.test(word)
+const word = "NASA";
+const NASARegex = /^[A-Z]{1,4}$/;
+const NASAResult = NASARegex.test(word);
 
-console.log(NASAResult)
+console.log(NASAResult);
 
 /*
   06
