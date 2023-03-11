@@ -6,11 +6,16 @@
 
 const form = document.querySelector('[data-js="form"]');
 
+const validateAUserName = (userNameInput) => {
+  const inputRegex = /^[a-zA-Z0-9]{7,11}$/;
+  const resultOfValidation = inputRegex.test(userNameInput);
+
+  return;
+};
 form.addEventListener("submit", (event) => {
   event.preventDefault();
   const inputValue = document.querySelector("#input");
-  const inputRegex = /^[a-zA-Z0-9]{7,11}$/;
-  const validate = inputRegex.test(inputValue.value);
+
   console.log(inputValue.value);
   console.log(validate);
 });

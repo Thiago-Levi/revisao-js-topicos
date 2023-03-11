@@ -20,6 +20,45 @@
   
   Dica: pesquise pelo método "insertAdjacentElement", no MDN;
 */
+const form = document.querySelector('[data-js="form"]');
+
+const validateUserName = (userName) => {
+  const userNameregex = /^[a-zA-Z]{6,}$/;
+  const resultOfUserNameregex = userNameregex.test(userName);
+  return resultOfUserNameregex;
+};
+
+const renderUserNamePlaceHolder = (placeHolderClass, placeHolderText) => {
+  const newParagraph = document.createElement("p");
+  newParagraph.classList.add(placeHolderClass);
+  newParagraph.innerText = placeHolderText;
+  return newParagraph;
+};
+form.addEventListener("keyup", (event) => {
+  event.preventDefault();
+  const inputValue = username.value;
+  const isValid = validateUserName(inputValue);
+  console.log(isValid);
+  let resultPlaceHolderValidation = "";
+
+  if (isValid) {
+    form.insertAdjacentElement(
+      "afterend",
+      renderUserNamePlaceHolder(
+        "username-success-feedback",
+        "Username válido =)."
+      )
+    );
+  } else {
+    form.insertAdjacentElement(
+      "afterend",
+      renderUserNamePlaceHolder(
+        "username-help-feedback",
+        "O valor deve conter no mínimo 6 caracteres, com apenas letras maiúsculas e/ou minúsculas"
+      )
+    );
+  }
+});
 
 /*
   02
