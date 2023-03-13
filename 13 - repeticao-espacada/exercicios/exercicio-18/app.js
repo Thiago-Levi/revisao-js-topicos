@@ -31,6 +31,7 @@ const validateUserName = (userName) => {
 const renderUserNamePlaceHolder = (placeHolderClass, placeHolderText) => {
   const newParagraph = document.createElement("p");
   newParagraph.classList.add(placeHolderClass);
+  newParagraph.setAttribute("data-js", "feedbackParagraph");
   newParagraph.innerText = placeHolderText;
   return newParagraph;
 };
@@ -39,7 +40,10 @@ form.addEventListener("keyup", (event) => {
   const inputValue = username.value;
   const isValid = validateUserName(inputValue);
   console.log(isValid);
-  let resultPlaceHolderValidation = "";
+
+  if (document.querySelector("[data-js='feedbackParagraph']")) {
+    document.querySelector("[data-js='feedbackParagraph']").remove();
+  }
 
   if (isValid) {
     form.insertAdjacentElement(
@@ -58,6 +62,28 @@ form.addEventListener("keyup", (event) => {
       )
     );
   }
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    if (document.querySelector("[data-js='feedbackParagraph']")) {
+      document.querySelector("[data-js='feedbackParagraph']").remove();
+    }
+    isValid
+      ? form.insertAdjacentElement(
+          "afterend",
+          renderUserNamePlaceHolder(
+            "submit-success-feedback",
+            "Dados enviados =)"
+          )
+        )
+      : form.insertAdjacentElement(
+          "afterend",
+          renderUserNamePlaceHolder(
+            "submit-help-feedback",
+            "Por favor, insira um username válido"
+          )
+        );
+    return;
+  });
 });
 
 /*
@@ -88,4 +114,11 @@ form.addEventListener("keyup", (event) => {
       - "Correção dos exercícios da aula 04 da etapa 05" - Aula 01-01 da etapa  
         6;
     2) Pesquisar no MDN.
+
 */
+
+const someFunction = function (param, func) {
+  return func(param) ? true : false;
+};
+
+console.log(someFunction(2, (item) => item === 2));
